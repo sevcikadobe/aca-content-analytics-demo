@@ -26,6 +26,10 @@ The site loads the **development** library from Data Collection (`launch-…-dev
 
 If you switch environments or republish, update **every page** plus `snippets/tags-head.html` with the new `<script src="…">` from **Data Collection → Property → Environments**. Initial setup and publish steps are in [docs/adobe-content-analytics-setup.md](docs/adobe-content-analytics-setup.md).
 
+## CTA click tracking (Launch)
+
+Article pages use `data-cta="register"` and `data-cta="buy"`. To send those clicks to Edge with the Web SDK, follow [docs/launch-cta-tracking.md](docs/launch-cta-tracking.md).
+
 ## Validate
 
 Use **Adobe Experience Platform Debugger**, then confirm dataset activity in **AEP** and reports in **CJA / Content Analytics**. See section 6 in [docs/adobe-content-analytics-setup.md](docs/adobe-content-analytics-setup.md).
