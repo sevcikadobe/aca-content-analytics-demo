@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Source of truth for Tags embed: snippets/tags-head.html — keep in sync -->
+    <script src="https://assets.adobedtm.com/ff6e3f45e83f/5d39978f682c/launch-60832f63047a-development.min.js" async></script>
+    <title>ACA Demo — Getting started with content analytics</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="header-inner">
+        <p class="logo"><a href="index.html">Content Analytics Demo</a></p>
+        <nav aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="article.html" aria-current="page">Article</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="article-body">
+        <p class="article-meta">Demo article · <time datetime="2026-04-14">April 14, 2026</time></p>
+        <div class="hero">
+          <h1>Getting started with content analytics</h1>
+          <p class="lede">
+            This page stands in for a real article or asset detail view so you can verify how
+            multiple URLs behave under your Content Analytics configuration.
+          </p>
+        </div>
+        <div class="card">
+          <h2>What to verify</h2>
+          <p>
+            After you deploy the Tags library, use the Experience Platform Debugger to confirm the
+            property and rules, then check AEP dataset ingestion and CJA Content Analytics reports.
+          </p>
+        </div>
+        <figure>
+          <!--
+            ACA tracks images as "assets" using the resolved image URL. Featurization runs in Adobe’s cloud
+            and must be able to fetch the image over the public internet — localhost/127.0.0.1 URLs are not
+            reachable, so asset metadata often appears only after you deploy to a public HTTPS URL (or tunnel).
+            Use loading="eager" for the primary image so it is in the DOM without deferral.
+          -->
+          <img
+            src="images/article-asset.jpg"
+            alt="Article illustration"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <figcaption>
+            Local file: <code>images/article-asset.jpg</code>. For asset-level data in AEP/CJA, test on a
+            <strong>public</strong> image URL (see docs).
+          </figcaption>
+        </figure>
+      </article>
+    </main>
+    <footer>
+      <p>Adobe Content Analytics demo — local static site</p>
+    </footer>
+  </body>
+</html>
