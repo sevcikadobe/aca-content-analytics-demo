@@ -77,11 +77,67 @@ Open **Data Collection** → your **Tag property** → **Rules**.
 
 ### Rule B — Buy now click
 
-Duplicate Rule A and change:
+> **Important — this is what makes the _Orders_ metric populate.**
+> Register is a link click, but "Buy now" is a **conversion**. Content Analytics'
+> **Orders** metric (and any commerce attribution back to the asset) comes from a
+> **commerce purchase** experience event, **not** from `web.webInteraction.linkClicks`.
+> If Buy now only sends a link-click event, Asset Views/Clicks/CTR/People will still
+> populate but **Orders stays 0** — because no order ever entered the event stream.
+
+Create this rule the same way as Rule A (**Events → Core → Click**, selector
+`button[data-cta="buy"]`), but the **action must send a commerce purchase event**:
 
 - **Name:** `CTA — Buy now click`
 - **Click selector:** `button[data-cta="buy"]`
-- In Custom code (if used), change `name` to e.g. `buy_now_cta`
+- **Actions → Add → Core → Custom code**, then:
+
+```javascript
+alloy("sendEvent", {
+  xdm: {
+    eventType: "commerce.purchases",
+    commerce: {
+      purchases: { value: 1 },
+      order: {
+        // Unique per order so CJA counts distinct orders.
+        purchaseID: "demo-" + Date.now(),
+        currencyCode: "USD",
+        priceTotal: 49.00
+      }
+    },
+    productListItems: [
+      {
+        SKU: "demo-sku-001",
+        name: "Demo product",
+        quantity: 1,
+        priceTotal: 49.00
+      }
+    ],
+    web: {
+      webPageDetails: { URL: window.location.href }
+    }
+  }
+});
+```
+
+Why each part matters:
+
+- **`eventType: "commerce.purchases"`** + **`commerce.purchases.value: 1`** — this is
+  what CJA reads as an **Order**. Without it the Orders column is always 0.
+- **`commerce.order.purchaseID`** — a unique id per click so orders aren't de-duplicated.
+- **`productListItems`** — optional but recommended; lets you report revenue/quantity.
+- The asset is linked to this order **automatically**: because the purchase event fires
+  on the article page (same page + same identity/People as the asset exposure),
+  Content Analytics attributes the order to the asset that was viewed. You do **not**
+  send the asset id yourself.
+
+> **Datastream/schema requirement:** the datastream feeding your dataset must have a
+> field group that includes the **Commerce** mixin (`commerce.purchases`,
+> `commerce.order`) and, for revenue, **Product list items**. If Send-event/XDM
+> validation fails, add the Commerce field group to the schema, or trim the payload to
+> the commerce fields your schema already allows.
+
+For a realistic demo, hardcoded values above are fine. To make price/SKU dynamic,
+read them from `data-*` attributes on the button (e.g. `event.target.dataset.price`).
 
 ---
 
@@ -97,7 +153,7 @@ Duplicate Rule A and change:
 1. Open your live or local site with **Adobe Experience Platform Debugger**.  
 2. Confirm the rule runs on click (Console / Logs, or rule names in Debugger if shown).  
 3. In **Network**, look for requests to **Edge** (`adobedc.net` / `edge.adobedc.net` region hosts) when you click each button.  
-4. In **AEP**, confirm rows in your **Experience Event** dataset with the expected `eventType` / `web.webInteraction` fields after processing delay.
+4. In **AEP**, confirm rows in your **Experience Event** dataset with the expected `eventType` after processing delay — for Buy now, look for `eventType: "commerce.purchases"` with a `commerce.order.purchaseID`. That row is what shows up as an **Order** attributed to the asset in CJA Content Analytics.
 
 ---
 
@@ -108,6 +164,7 @@ Duplicate Rule A and change:
 | Rule never fires | Selector typo; library not published to this environment; cached old library (hard refresh, incognito). |
 | Send event fails XDM validation | Schema on the datastream doesn’t include `web.webInteraction`; use a **custom** `eventType` or fields your schema allows. |
 | Multiple hits | Two rules both matching — ensure one rule per button with distinct selectors. |
+| **Orders stays 0 / Infinity% but Asset Views work** | Buy now is sending a **link-click** event, not a **commerce purchase**. Use the `commerce.purchases` payload in Rule B. Also confirm the schema has the **Commerce** field group and the `purchaseID` is unique per click. |
 
 ---
 

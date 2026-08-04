@@ -3,6 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Adobe Client Data Layer (ACDL): define BEFORE the Tags embed so it exists when Launch loads. -->
+    <script>
+      window.adobeDataLayer = window.adobeDataLayer || [];
+      window.acaPageData = {
+        page: { name: "Journeys and content in CJA", category: "article", articleId: "article-3", language: "en" },
+        product: { sku: "aca-guide-03", name: "Journeys and content in CJA", price: 69.0, currency: "USD" }
+      };
+      window.adobeDataLayer.push({
+        event: "page.view",
+        page: window.acaPageData.page,
+        product: window.acaPageData.product
+      });
+    </script>
     <!-- Source of truth for Tags embed: snippets/tags-head.html — keep in sync -->
     <script src="https://assets.adobedtm.com/ff6e3f45e83f/5d39978f682c/launch-60832f63047a-development.min.js" async></script>
     <title>ACA Demo — Journeys and content in CJA</title>
@@ -57,5 +70,6 @@
     <footer>
       <p>Adobe Content Analytics demo — local static site</p>
     </footer>
+    <script src="js/datalayer.js"></script>
   </body>
 </html>
