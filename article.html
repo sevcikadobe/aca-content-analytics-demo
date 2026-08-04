@@ -58,13 +58,16 @@
             reachable, so asset metadata often appears only after you deploy to a public HTTPS URL (or tunnel).
             Use loading="eager" for the primary image so it is in the DOM without deferral.
           -->
-          <img
-            src="images/article-asset.jpg"
-            alt="Article illustration"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
+          <!-- Image wrapped in a link so clicks on the asset are collected as Asset Clicks in Content Analytics. -->
+          <a class="asset-link" href="images/article-asset.jpg" data-asset-click="hero">
+            <img
+              src="images/article-asset.jpg"
+              alt="Article illustration"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </a>
           <figcaption>
             Local file: <code>images/article-asset.jpg</code>. For asset-level data in AEP/CJA, test on a
             <strong>public</strong> image URL (see docs).
