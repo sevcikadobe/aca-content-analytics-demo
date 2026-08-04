@@ -52,13 +52,16 @@
           </p>
         </div>
         <figure>
-          <img
-            src="images/article3-asset.jpg"
-            alt="Article illustration"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
+          <!-- Image wrapped in a link so clicks on the asset are collected as Asset Clicks in Content Analytics. -->
+          <a class="asset-link" href="images/article3-asset.jpg" data-asset-click="hero">
+            <img
+              src="images/article3-asset.jpg"
+              alt="Article illustration"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </a>
           <figcaption>Shared asset image: <code>images/article-asset.jpg</code></figcaption>
         </figure>
         <p class="article-actions">
