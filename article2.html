@@ -28,9 +28,9 @@
         <p class="logo"><a href="index.html">Content Analytics Demo</a></p>
         <nav aria-label="Primary">
           <a href="index.html">Home</a>
-          <a href="article.html">Article 1</a>
-          <a href="article2.html" aria-current="page">Article 2</a>
-          <a href="article3.html">Article 3</a>
+          <a href="article.html">Lesson 1</a>
+          <a href="article2.html" aria-current="page">Lesson 2</a>
+          <a href="article3.html">Lesson 3</a>
         </nav>
       </div>
     </header>
@@ -60,24 +60,47 @@
           <figcaption>Step inside. This is the asset we'll measure conversions against.</figcaption>
         </figure>
 
+        <p class="article-actions">
+          <button type="button" class="btn btn-secondary" data-cta="register" data-nav-to="article3.html">Join the Club</button>
+          <button type="button" class="btn btn-primary" data-cta="buy" data-nav-to="article3.html">Book Your Stay</button>
+        </p>
+
         <div class="card">
           <h2>The two conversion actions</h2>
           <p>
-            Below the asset are two calls to action. <strong>Register</strong> is a soft
-            conversion (a lead); <strong>Buy now</strong> is a hard conversion (an order). Each
-            button fires a data-layer event — <code>cta.register</code> or <code>cta.buy</code> —
-            and the purchase carries an <code>order</code> with a unique ID, price, and currency.
+            Above are two calls to action. <strong>Join the Club</strong> is a soft
+            conversion (a lead); <strong>Book Your Stay</strong> is a hard conversion (an order).
+            Each button fires a data-layer event — <code>cta.register</code> or <code>cta.buy</code>
+            — and the booking carries an <code>order</code> with a unique ID, price, and currency.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>How the conversion links to the asset</h2>
+          <p>
+            The conversion doesn't stand alone. When this page loaded, Content Analytics recorded
+            an <strong>impression</strong> of the asset (the image) and its <strong>experience</strong>
+            (the page), each with a stable identity. The click and the conversion event are
+            collected in that same page context, so Content Analytics can tie them all together:
+          </p>
+          <p class="flow">
+            Asset / experience <strong>impression</strong>
+            <span aria-hidden="true">→</span> asset <strong>click</strong>
+            <span aria-hidden="true">→</span> <strong>conversion</strong> (register / order)
+          </p>
+          <p>
+            Because every step shares that identity, the order is <em>attributed</em> to the exact
+            content that was seen and clicked — not just counted in isolation. That link is what
+            lets you say a specific asset or experience drove the conversion.
           </p>
         </div>
 
         <div class="card">
           <h2>Does this content lead to conversions — not just engagement?</h2>
           <p>
-            Because the Register and Buy now events share the same page and asset context as the
-            featurized image, Content Analytics can attribute conversions back to the specific
-            asset that was viewed and clicked. Engagement (impressions, clicks) and outcome
-            (registrations, orders) sit on the same row — so you can see which assets actually
-            move people to act.
+            With that link in place, engagement (impressions, clicks) and outcome (registrations,
+            orders) sit on the same row in your reports — so you can move past "which asset got
+            attention" to "which asset actually moved people to act."
           </p>
         </div>
 
@@ -90,11 +113,6 @@
             featurized asset, to a clickthrough, to a measurable conversion and its return.
           </p>
         </div>
-
-        <p class="article-actions">
-          <button type="button" class="btn btn-secondary" data-cta="register" data-nav-to="article3.html">Register</button>
-          <button type="button" class="btn btn-primary" data-cta="buy" data-nav-to="article3.html">Buy now</button>
-        </p>
       </article>
     </main>
     <footer>
