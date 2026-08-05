@@ -36,34 +36,61 @@
     </header>
     <main id="main">
       <article class="article-body">
-        <p class="article-meta">Demo article · <time datetime="2026-04-14">April 14, 2026</time></p>
+        <p class="article-meta">Walkthrough · Lesson 2</p>
         <div class="hero">
-          <h1>Measuring content engagement</h1>
+          <h1>From Asset to Conversion</h1>
           <p class="lede">
-            Second sample page for Content Analytics: compare how experiences and assets appear when
-            the same image is reused across URLs.
+            In Lesson 1 the featurization service told us <em>what</em> an asset contains and a
+            click told us people were interested. This lesson connects that asset to a
+            <strong>conversion</strong> — so you can prove content drives outcomes, not just
+            engagement.
           </p>
         </div>
-        <div class="card">
-          <h2>What to verify</h2>
-          <p>
-            Compare this URL with Article 1 and Article 3 in Debugger and CJA to see journey and
-            content breakdowns across pages.
-          </p>
-        </div>
+
         <figure>
-          <!-- Image wrapped in a link so clicks on the asset are collected as Asset Clicks in Content Analytics. -->
           <a class="asset-link" href="images/article2-asset.jpg" data-asset-click="hero">
             <img
               src="images/article2-asset.jpg"
-              alt="Article illustration"
+              alt="Motel room interior"
               loading="eager"
               decoding="async"
               fetchpriority="high"
             />
           </a>
-          <figcaption>Shared asset image: <code>images/article-asset.jpg</code></figcaption>
+          <figcaption>Step inside. This is the asset we'll measure conversions against.</figcaption>
         </figure>
+
+        <div class="card">
+          <h2>The two conversion actions</h2>
+          <p>
+            Below the asset are two calls to action. <strong>Register</strong> is a soft
+            conversion (a lead); <strong>Buy now</strong> is a hard conversion (an order). Each
+            button fires a data-layer event — <code>cta.register</code> or <code>cta.buy</code> —
+            and the purchase carries an <code>order</code> with a unique ID, price, and currency.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Does this content lead to conversions — not just engagement?</h2>
+          <p>
+            Because the Register and Buy now events share the same page and asset context as the
+            featurized image, Content Analytics can attribute conversions back to the specific
+            asset that was viewed and clicked. Engagement (impressions, clicks) and outcome
+            (registrations, orders) sit on the same row — so you can see which assets actually
+            move people to act.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>What is the ROI on this content?</h2>
+          <p>
+            Every <code>cta.buy</code> sends an order value into the dataset. Divide that revenue
+            by the cost of producing and running the asset and you have content-level ROI:
+            <em>this image earned N orders worth $X</em>. That is the full journey — from a
+            featurized asset, to a clickthrough, to a measurable conversion and its return.
+          </p>
+        </div>
+
         <p class="article-actions">
           <button type="button" class="btn btn-secondary" data-cta="register">Register</button>
           <button type="button" class="btn btn-primary" data-cta="buy">Buy now</button>
