@@ -183,11 +183,16 @@ main {
   outline-offset: 3px;
 }
 
-.article-body img {
+.article-body img,
+.card figure img {
   width: 100%;
   height: auto;
   border-radius: 8px;
   border: 1px solid var(--border);
+}
+
+.card figure {
+  margin: 1.25rem 0 0.5rem;
 }
 
 figcaption {
