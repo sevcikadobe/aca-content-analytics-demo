@@ -36,30 +36,18 @@
     </header>
     <main id="main">
       <article class="article-body">
-        <p class="article-meta">Demo article · <time datetime="2026-04-14">April 14, 2026</time></p>
+        <p class="article-meta">Walkthrough · Lesson 1</p>
         <div class="hero">
-          <h1>Getting started with content analytics</h1>
+          <h1>The Featurization Service in Content Analytics</h1>
           <p class="lede">
-            This page stands in for a real article or asset detail view so you can verify how
-            multiple URLs behave under your Content Analytics configuration.
+            Featurization is how Content Analytics turns your images and assets into
+            structured, measurable attributes. This lesson explains what it does and why it
+            matters.
           </p>
         </div>
-        <div class="card">
-          <h2>What to verify</h2>
-          <p>
-            After you deploy the Tags library, use the Experience Platform Debugger to confirm the
-            property and rules, then check AEP dataset ingestion and CJA Content Analytics reports.
-          </p>
-        </div>
+
         <figure>
-          <!--
-            ACA tracks images as "assets" using the resolved image URL. Featurization runs in Adobe’s cloud
-            and must be able to fetch the image over the public internet — localhost/127.0.0.1 URLs are not
-            reachable, so asset metadata often appears only after you deploy to a public HTTPS URL (or tunnel).
-            Use loading="eager" for the primary image so it is in the DOM without deferral.
-          -->
-          <!-- Image wrapped in a link so clicks on the asset are collected as Asset Clicks in Content Analytics. -->
-          <a class="asset-link" href="images/article-asset.jpg" data-asset-click="hero">
+          <a class="asset-link" href="article2.html" data-asset-click="hero">
             <img
               src="images/article-asset.jpg"
               alt="Article illustration"
@@ -68,15 +56,52 @@
               fetchpriority="high"
             />
           </a>
-          <figcaption>
-            Local file: <code>images/article-asset.jpg</code>. For asset-level data in AEP/CJA, test on a
-            <strong>public</strong> image URL (see docs).
-          </figcaption>
+          <figcaption>👆 Click the image to continue to Lesson 2 — this counts as an Asset Click.</figcaption>
         </figure>
-        <p class="article-actions">
-          <button type="button" class="btn btn-secondary" data-cta="register">Register</button>
-          <button type="button" class="btn btn-primary" data-cta="buy">Buy now</button>
-        </p>
+
+        <div class="card">
+          <h2>What featurization does</h2>
+          <p>
+            When a page loads, Content Analytics collects the URLs of the images and assets on
+            it. Adobe's cloud then <strong>fetches each asset</strong> and runs it through the
+            featurization service, which uses AI to detect attributes such as objects, colors,
+            people, text, and overall theme.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Why it matters</h2>
+          <p>
+            These detected features become dimensions you can report on. Instead of only knowing
+            <em>which page</em> performed well, you learn <em>what kind of content</em> drives
+            engagement — for example, that images with people outperform product-only shots.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Tracking clickthroughs</h2>
+          <p>
+            Featurization tells you <em>what</em> an asset contains; clickthroughs tell you
+            whether people <em>act</em> on it. The image above is wrapped in a link marked with a
+            <code>data-asset-click</code> attribute. When you click it, our data-layer script
+            records an <strong>Asset Click</strong> event and then sends you on to Lesson 2.
+          </p>
+          <p>
+            In Content Analytics you can pair that click metric with the features detected on the
+            asset — so you can answer questions like "do images with people earn more
+            clickthroughs?" <a href="article2.html">Click the image, or this link, to continue →</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>The one requirement</h2>
+          <p>
+            Featurization runs on Adobe's servers, so every asset URL must be
+            <strong>publicly reachable over HTTPS</strong>. Local addresses like
+            <code>localhost</code> or <code>127.0.0.1</code> cannot be fetched, so asset-level
+            data will be missing until the page is served from a public URL.
+          </p>
+        </div>
       </article>
     </main>
     <footer>
