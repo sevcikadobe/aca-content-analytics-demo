@@ -46,5 +46,15 @@
     var btn = e.target.closest("[data-cta]");
     if (!btn) return;
     pushCta(btn.getAttribute("data-cta"), (btn.textContent || "").trim());
+
+    // Optional walkthrough navigation: continue to the next lesson after the
+    // conversion event is pushed. A short delay gives the Web SDK time to send
+    // the beacon before the page unloads.
+    var navTo = btn.getAttribute("data-nav-to");
+    if (navTo) {
+      setTimeout(function () {
+        window.location.href = navTo;
+      }, 300);
+    }
   });
 })();
