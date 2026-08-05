@@ -62,10 +62,11 @@
         <div class="card">
           <h2>What featurization does</h2>
           <p>
-            When a page loads, Content Analytics collects the URLs of the images and assets on
-            it. Adobe's cloud then <strong>fetches each asset</strong> and runs it through the
-            featurization service, which uses AI to detect attributes such as objects, colors,
-            people, text, and overall theme.
+            When a page loads, Content Analytics collects the URLs of the images on it. Adobe's
+            cloud then <strong>fetches each asset</strong> and runs it through the featurization
+            service, which uses AI to detect visual attributes such as objects, colors, and
+            style of photography. (Assets are images; the text on a page is analyzed separately as
+            experience attributes.)
           </p>
         </div>
 
@@ -99,7 +100,8 @@
             Featurization runs on Adobe's servers, so every asset URL must be
             <strong>publicly reachable over HTTPS</strong>. Local addresses like
             <code>localhost</code> or <code>127.0.0.1</code> cannot be fetched, so asset-level
-            data will be missing until the page is served from a public URL.
+            data will be missing until the page is served from a public URL. Note too that
+            featurization currently supports <strong>English only</strong>.
           </p>
         </div>
       </article>
